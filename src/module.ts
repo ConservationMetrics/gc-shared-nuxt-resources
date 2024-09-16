@@ -8,12 +8,15 @@ export default defineNuxtModule<ModuleOptions>({
     configKey: "gcSharedResources",
   },
 
-  async setup(_options, _nuxt) {
+  async setup(_options, nuxt) {
     const { resolve } = createResolver(import.meta.url);
 
     addComponent({
       name: "LanguagePicker",
       filePath: resolve("./runtime/components/LanguagePicker.vue"),
     });
+
+    // TODO: How to add a CSS file without making it globally available to the entire app?
+    nuxt.options.css.push(resolve("./runtime/assets/overlay.css"));
   },
 });
