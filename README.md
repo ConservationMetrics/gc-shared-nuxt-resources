@@ -14,7 +14,7 @@ Shared components (components, pages, assets) for Guardian Connector Nuxt.js app
 Install the module to your Nuxt application with one command:
 
 ```bash
-npx nuxi module add gc-shared-components
+npx nuxi module add gc-shared-resources
 ```
 
 That's it! You can now use GuardianConnector Shared Resources Library in your Nuxt app ✨
@@ -55,11 +55,11 @@ That's it! You can now use GuardianConnector Shared Resources Library in your Nu
 
 <!-- Badges -->
 
-[npm-version-src]: https://img.shields.io/npm/v/gc-shared-components/latest.svg?style=flat&colorA=020420&colorB=00DC82
-[npm-version-href]: https://npmjs.com/package/gc-shared-components
-[npm-downloads-src]: https://img.shields.io/npm/dm/gc-shared-components.svg?style=flat&colorA=020420&colorB=00DC82
-[npm-downloads-href]: https://npmjs.com/package/gc-shared-components
-[license-src]: https://img.shields.io/npm/l/gc-shared-components.svg?style=flat&colorA=020420&colorB=00DC82
-[license-href]: https://npmjs.com/package/gc-shared-components
+[npm-version-src]: https://img.shields.io/npm/v/gc-shared-resources/latest.svg?style=flat&colorA=020420&colorB=00DC82
+[npm-version-href]: https://npmjs.com/package/gc-shared-resources
+[npm-downloads-src]: https://img.shields.io/npm/dm/gc-shared-resources.svg?style=flat&colorA=020420&colorB=00DC82
+[npm-downloads-href]: https://npmjs.com/package/gc-shared-resources
+[license-src]: https://img.shields.io/npm/l/gc-shared-resources.svg?style=flat&colorA=020420&colorB=00DC82
+[license-href]: https://npmjs.com/package/gc-shared-resources
 [nuxt-src]: https://img.shields.io/badge/Nuxt-020420?logo=nuxt.js
 [nuxt-href]: https://nuxt.com
