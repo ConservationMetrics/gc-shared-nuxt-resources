@@ -1,6 +1,6 @@
 {
   "name": "gc-shared-components",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Shared components for Guardian Connector Nuxt.js applications",
   "type": "module",
   "scripts": {
