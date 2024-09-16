@@ -1,11 +1,11 @@
-# GuardianConnector Shared Components Library
+# GuardianConnector Shared Resources Library
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
 [![License][license-src]][license-href]
 [![Nuxt][nuxt-src]][nuxt-href]
 
-Shared components for Guardian Connector Nuxt.js applications.
+Shared components (components, pages, assets) for Guardian Connector Nuxt.js applications.
 
 - [✨ &nbsp;Release Notes](/CHANGELOG.md)
 
@@ -17,7 +17,7 @@ Install the module to your Nuxt application with one command:
 npx nuxi module add gc-shared-components
 ```
 
-That's it! You can now use GuardianConnector Shared Components Library in your Nuxt app ✨
+That's it! You can now use GuardianConnector Shared Resources Library in your Nuxt app ✨
 
 ## Contribution
 

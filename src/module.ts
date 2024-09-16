@@ -4,8 +4,8 @@ export interface ModuleOptions {}
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
-    name: "gc-shared-components",
-    configKey: "gcSharedComponents",
+    name: "gc-shared-resources",
+    configKey: "gcSharedResources",
   },
 
   async setup(_options, _nuxt) {
