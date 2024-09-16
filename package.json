@@ -1,0 +1,58 @@
+{
+  "name": "gc-shared-components",
+  "version": "1.0.0",
+  "description": "Shared components for Guardian Connector Nuxt.js applications",
+  "type": "module",
+  "scripts": {
+    "prepack": "nuxt-module-build build",
+    "dev": "nuxi dev playground",
+    "dev:build": "nuxi build playground",
+    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare",
+    "release": "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
+    "link": "npm link",
+    "lint": "prettier --write ./ --ignore-path .prettierignore",
+    "prepare": "husky",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
+    "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
+  },
+  "dependencies": {
+    "@nuxt/kit": "^3.13.1"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "^1.4.2",
+    "@nuxt/module-builder": "^0.8.3",
+    "@nuxt/schema": "^3.13.1",
+    "@nuxt/test-utils": "^3.14.2",
+    "@types/node": "latest",
+    "changelogen": "^0.5.5",
+    "husky": "^9.0.11",
+    "nuxt": "^3.13.0",
+    "prettier": "^3.3.2",
+    "typescript": "latest",
+    "vitest": "^2.0.5",
+    "vue-tsc": "^2.1.6"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/types.d.ts",
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
+    }
+  },
+  "main": "./dist/module.cjs",
+  "types": "./dist/types.d.ts",
+  "files": [
+    "dist"
+  ],
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx,json,css,vue}": [
+      "prettier --write"
+    ]
+  },
+  "engines": {
+    "node": "20.15.0"
+  },
+  "author": "Conservation Metrics",
+  "license": "MIT"
+}
