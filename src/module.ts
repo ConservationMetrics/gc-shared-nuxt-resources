@@ -1,4 +1,4 @@
-import { defineNuxtModule, addComponent, createResolver } from "@nuxt/kit";
+import { defineNuxtModule, addComponentsDir, createResolver } from "@nuxt/kit";
 
 export interface ModuleOptions {}
 
@@ -11,9 +11,8 @@ export default defineNuxtModule<ModuleOptions>({
   async setup(_options, nuxt) {
     const { resolve } = createResolver(import.meta.url);
 
-    addComponent({
-      name: "LanguagePicker",
-      filePath: resolve("./runtime/components/LanguagePicker.vue"),
+    addComponentsDir({
+      path: resolve("runtime/components"),
     });
 
     // TODO: How to add a CSS file without making it globally available to the entire app?
