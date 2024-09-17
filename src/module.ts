@@ -33,14 +33,14 @@ export default defineNuxtModule<ModuleOptions>({
     // Add global middleware
     addRouteMiddleware({
       name: "oauth.global",
-      path: resolve("./runtime/middleware/oauth.global.ts"),
+      path: resolve("./runtime/middleware/oauth.global"),
       global: true,
     });
 
     // Add server middleware for API authentication
     addServerHandler({
       middleware: true,
-      handler: resolve("./runtime/server/middleware/apiAuth.ts"),
+      handler: resolve("./runtime/server/middleware/apiAuth"),
     });
   },
 });
