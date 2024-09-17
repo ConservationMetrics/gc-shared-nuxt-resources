@@ -1,6 +1,7 @@
 import {
   defineNuxtModule,
   addComponentsDir,
+  addImportsDir,
   addRouteMiddleware,
   addServerHandler,
   createResolver,
@@ -16,6 +17,9 @@ export default defineNuxtModule<ModuleOptions>({
 
   async setup(_options, nuxt) {
     const { resolve } = createResolver(import.meta.url);
+
+    // Add composables directory
+    addImportsDir(resolve("./composables"));
 
     // Add components directory
     addComponentsDir({
