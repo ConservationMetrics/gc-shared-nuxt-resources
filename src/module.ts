@@ -1,4 +1,9 @@
-import { defineNuxtModule, addComponentsDir, createResolver } from "@nuxt/kit";
+import {
+  defineNuxtModule,
+  addComponentsDir,
+  addRouteMiddleware,
+  createResolver,
+} from "@nuxt/kit";
 
 export interface ModuleOptions {}
 
@@ -12,7 +17,13 @@ export default defineNuxtModule<ModuleOptions>({
     const { resolve } = createResolver(import.meta.url);
 
     addComponentsDir({
-      path: resolve("runtime/components"),
+      path: resolve("./runtime/components"),
+    });
+
+    addRouteMiddleware({
+      name: "oauth.global",
+      path: resolve("./runtime/middleware/oauth.global.ts"),
+      global: true,
     });
 
     // TODO: How to add a CSS file without making it globally available to the entire app?
