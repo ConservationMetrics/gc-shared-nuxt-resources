@@ -6,7 +6,7 @@ import {
 
 // Following example: https://github.com/atinux/atidone/blob/main/app/middleware/auth.ts
 export default defineNuxtRouteMiddleware(async (to) => {
-  // @ts-ignore to avoid type error on useUserSession
+  // @ts-ignore to avoid type error on useUserSession, which will be available at runtime in the app
   const { loggedIn } = useUserSession();
   const {
     public: { authStrategy },
