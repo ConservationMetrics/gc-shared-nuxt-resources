@@ -19,6 +19,15 @@ npx nuxi module add gc-shared-resources
 
 That's it! You can now use GuardianConnector Shared Resources Library in your Nuxt app ✨
 
+## How to use this module
+
+Unlike many Nuxt modules, this repository does not use a `playground/` directory. Instead, this module should be used directly with a GuardianConnector Nuxt application.
+
+For development purposes, utilize a symlink to this module in a Nuxt application to use your local code in runtime:
+
+1. Generate type stubs by running `npm run dev:prepare`
+2. In your Nuxt application, run `npm link ../gc-shared-components` (assuming your module and Nuxt application are in the same root directory, if not adapt the path)
+
 ## Contribution
 
 <details>
