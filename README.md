@@ -5,7 +5,7 @@
 [![License][license-src]][license-href]
 [![Nuxt][nuxt-src]][nuxt-href]
 
-Shared components (components, pages, assets) for Guardian Connector Nuxt.js applications.
+Shared components (components, pages, assets, middleware and more) for GuardianConnector Nuxt.js applications.
 
 - [✨ &nbsp;Release Notes](/CHANGELOG.md)
 
@@ -18,6 +18,15 @@ npx nuxi module add gc-shared-resources
 ```
 
 That's it! You can now use GuardianConnector Shared Resources Library in your Nuxt app ✨
+
+## How to use this module
+
+Unlike many Nuxt modules, this repository does not use a `playground/` directory. Instead, this module should be used directly with a GuardianConnector Nuxt application.
+
+For development purposes, utilize a symlink to this module in a Nuxt application to use your local code in runtime:
+
+1. Generate type stubs by running `npm run dev:prepare`
+2. In your Nuxt application, run `npm link ../gc-shared-components` (assuming your module and Nuxt application are in the same root directory, if not adapt the path)
 
 ## Contribution
 
@@ -37,7 +46,7 @@ That's it! You can now use GuardianConnector Shared Resources Library in your Nu
   # Build the playground
   npm run dev:build
   
-  # Create a npn symlink
+  # Create a npm symlink
   npm run link
   
   # Run Prettier
