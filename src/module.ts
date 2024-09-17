@@ -2,6 +2,7 @@ import {
   defineNuxtModule,
   addComponentsDir,
   addRouteMiddleware,
+  addServerHandler,
   createResolver,
 } from "@nuxt/kit";
 
@@ -16,17 +17,26 @@ export default defineNuxtModule<ModuleOptions>({
   async setup(_options, nuxt) {
     const { resolve } = createResolver(import.meta.url);
 
+    // Add components directory
     addComponentsDir({
       path: resolve("./runtime/components"),
     });
 
+    // Add CSS files
+    // TODO: How to add a CSS file without making it globally available to the entire app?
+    nuxt.options.css.push(resolve("./runtime/assets/overlay.css"));
+
+    // Add global middleware
     addRouteMiddleware({
       name: "oauth.global",
       path: resolve("./runtime/middleware/oauth.global.ts"),
       global: true,
     });
 
-    // TODO: How to add a CSS file without making it globally available to the entire app?
-    nuxt.options.css.push(resolve("./runtime/assets/overlay.css"));
+    // Add server middleware for API authentication
+    addServerHandler({
+      middleware: true,
+      handler: resolve("./runtime/server/middleware/apiAuth.ts"),
+    });
   },
 });
