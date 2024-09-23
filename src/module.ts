@@ -19,7 +19,7 @@ export default defineNuxtModule<ModuleOptions>({
     const { resolve } = createResolver(import.meta.url);
 
     // Add composables directory
-    addImportsDir(resolve("./composables"));
+    addImportsDir(resolve("./runtime/composables"));
 
     // Add components directory
     addComponentsDir({

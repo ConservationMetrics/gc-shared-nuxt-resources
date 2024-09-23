@@ -1,6 +1,7 @@
 import {
   defineNuxtRouteMiddleware,
   useRuntimeConfig,
+  useUserSession,
   navigateTo,
 } from "#imports";
 

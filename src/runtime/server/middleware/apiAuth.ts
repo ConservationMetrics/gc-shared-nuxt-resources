@@ -1,31 +1,26 @@
-import { defineEventHandler, H3Event, createError, eventHandler } from "h3";
+import { H3Event, createError, eventHandler } from "h3";
+import { useRuntimeConfig } from "#imports";
 
-export default (appApiKey: string) =>
-  defineEventHandler(
-    eventHandler((event: H3Event) => {
-      const url = event.node.req.url;
-      if (!url) {
-        return;
-      }
+export default eventHandler((event) => {
+  const {
+    public: { appApiKey },
+  } = useRuntimeConfig();
+  const url = event.node.req.url;
 
-      // Only apply middleware to API routes
-      if (!url.startsWith("/api/")) {
-        return;
-      }
-
-      // Bypass middleware for specific paths
-      if (url.startsWith("/api/map") || url.startsWith("/api/_auth/")) {
-        return;
-      }
-
-      // Match the API key from the request with the app's API key
-      const requestApiKey = event.node.req.headers["x-api-key"];
-
-      if (requestApiKey !== appApiKey) {
-        throw createError({
-          status: 403,
-          message: "Forbidden",
-        });
-      }
-    }),
-  );
+  if (!url) {
+    return;
+  }
+  if (!url.startsWith("/api/")) {
+    return;
+  }
+  if (url.startsWith("/api/map") || url.startsWith("/api/_auth/")) {
+    return;
+  }
+  const requestApiKey = event.node.req.headers["x-api-key"];
+  if (requestApiKey !== appApiKey) {
+    throw createError({
+      status: 403,
+      message: "Forbidden",
+    });
+  }
+});
