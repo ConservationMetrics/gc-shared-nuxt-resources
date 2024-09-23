@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.1.2
+
+[compare changes](https://github.com/conservationmetrics/gc-shared-components/compare/v1.1.1...v1.1.2)
+
 ## v1.1.1
 
 [compare changes](https://github.com/conservationmetrics/gc-shared-components/compare/v1.0.6...v1.1.1)
