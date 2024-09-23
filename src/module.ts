@@ -42,5 +42,11 @@ export default defineNuxtModule<ModuleOptions>({
       middleware: true,
       handler: resolve("./runtime/server/middleware/apiAuth"),
     });
+
+    // Add server route for Auth0
+    addServerHandler({
+      route: "/auth/auth0",
+      handler: resolve("./runtime/server/routes/auth/auth0.get"),
+    });
   },
 });
