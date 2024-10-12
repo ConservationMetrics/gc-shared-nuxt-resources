@@ -1,3 +1,33 @@
+<script setup>
+import { ref, computed } from "vue";
+import { useI18n } from "vue-i18n";
+
+// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+const { t, locale, locales } = useI18n();
+
+// Populate available locales from i18n plugin
+const availableLocales = computed(() => locales.value);
+
+const currentLocaleName = computed(() => {
+  const currentLocale = locales.value.find(
+    (lang) => lang.code === locale.value,
+  );
+  return currentLocale ? currentLocale.name : "";
+});
+
+// Dropdown state handling
+const dropdownOpen = ref(false);
+
+const toggleDropdown = () => {
+  dropdownOpen.value = !dropdownOpen.value;
+};
+
+const changeLocale = (localeCode) => {
+  locale.value = localeCode;
+  dropdownOpen.value = false;
+};
+</script>
+
 <template>
   <div class="relative inline-block text-left">
     <div>
@@ -39,34 +69,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref, computed } from "vue";
-import { useI18n } from "vue-i18n";
-
-// Set up reactive state
-const dropdownOpen = ref(false);
-
-// Set up composables
-const { t, locale, locales } = useI18n();
-
-// Computed properties
-const availableLocales = computed(() => locales.value);
-
-const currentLocaleName = computed(() => {
-  const currentLocale = locales.value.find(
-    (lang) => lang.code === locale.value,
-  );
-  return currentLocale ? currentLocale.name : "";
-});
-
-// Methods
-const toggleDropdown = () => {
-  dropdownOpen.value = !dropdownOpen.value;
-};
-
-const changeLocale = (localeCode) => {
-  locale.value = localeCode;
-  dropdownOpen.value = false;
-};
-</script>

@@ -1,4 +1,4 @@
-import { H3Event, createError, eventHandler } from "h3";
+import { createError, eventHandler } from "h3";
 import { useRuntimeConfig } from "#imports";
 
 export default eventHandler((event) => {

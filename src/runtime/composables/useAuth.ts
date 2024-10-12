@@ -6,7 +6,6 @@ export const useAuth = (loggedIn: { value: boolean }) => {
   const redirectPath = ref("");
 
   const router = useRouter();
-  // @ts-ignore to avoid type error on useLocalePath, which will be available at runtime in the app
   const localePath = useLocalePath();
 
   const redirect = router.currentRoute.value.query.redirect;

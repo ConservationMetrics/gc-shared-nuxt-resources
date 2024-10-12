@@ -10,16 +10,20 @@
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare",
     "release": "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
     "link": "npm link",
-    "lint": "prettier --write ./ --ignore-path .prettierignore",
+    "lint:prettier": "prettier ./ --check --ignore-path .prettierignore",
+    "lint:eslint": "eslint . --cache",
+    "lint": "npm run lint:prettier && npm run lint:eslint",
     "prepare": "husky",
     "test": "vitest run",
     "test:watch": "vitest watch",
     "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.13.1"
+    "@nuxt/kit": "^3.13.1",
+    "typescript-eslint": "^8.8.1"
   },
   "devDependencies": {
+    "@eslint/js": "^9.11.1",
     "@nuxt/devtools": "^1.4.2",
     "@nuxt/module-builder": "^0.8.3",
     "@nuxt/schema": "^3.13.1",
@@ -27,11 +31,15 @@
     "@types/node": "latest",
     "@vue/test-utils": "^2.4.6",
     "changelogen": "^0.5.5",
+    "eslint": "^9.11.1",
+    "eslint-config-flat-gitignore": "^0.3.0",
+    "eslint-plugin-vue": "^9.28.0",
+    "globals": "^15.9.0",
     "husky": "^9.0.11",
     "jsdom": "^25.0.0",
+    "lint-staged": "^15.2.7",
     "nuxt": "^3.13.0",
     "prettier": "^3.3.2",
-    "typescript": "latest",
     "vitest": "^2.0.5",
     "vue-i18n": "^10.0.1",
     "vue-tsc": "^2.1.6"

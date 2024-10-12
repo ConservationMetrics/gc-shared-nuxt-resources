@@ -1,3 +1,20 @@
+<script setup>
+import { useI18n } from "vue-i18n";
+
+const props = defineProps({
+  errorMessage: {
+    type: String,
+    default: "",
+  },
+});
+
+const { t } = useI18n();
+
+const loginWithAuth0 = () => {
+  window.location.href = "/auth/auth0";
+};
+</script>
+
 <template>
   <div class="container relative">
     <div
@@ -13,29 +30,9 @@
       >
         {{ $t("loginButton") }}
       </button>
-      <p v-if="errorMessage" class="text-red-500 text-xs italic">
+      <p v-if="props.errorMessage" class="text-red-500 text-xs italic">
         {{ t("yourAccessIsPending") }}
       </p>
     </div>
   </div>
 </template>
-
-<script setup>
-import { useI18n } from "vue-i18n";
-
-// Define props
-const props = defineProps({
-  errorMessage: {
-    type: String,
-    default: "",
-  },
-});
-
-// Set up composables
-const { t } = useI18n();
-
-// Methods
-const loginWithAuth0 = () => {
-  window.location.href = "/auth/auth0";
-};
-</script>
