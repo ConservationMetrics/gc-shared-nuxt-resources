@@ -7,7 +7,12 @@ import {
   createResolver,
 } from "@nuxt/kit";
 
-export interface ModuleOptions {}
+export interface ModuleOptions {
+  enableOAuth?: boolean;
+  customCssPath?: string;
+  apiAuthEnabled?: boolean;
+  auth0RoutePath?: string;
+}
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
@@ -15,7 +20,7 @@ export default defineNuxtModule<ModuleOptions>({
     configKey: "gcSharedResources",
   },
 
-  async setup(_options, nuxt) {
+  async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url);
 
     // Add composables directory
@@ -27,25 +32,33 @@ export default defineNuxtModule<ModuleOptions>({
     });
 
     // Add CSS files
-    // TODO: How to add a CSS file without making it globally available to the entire app?
-    nuxt.options.css.push(resolve("./runtime/assets/overlay.css"));
+    const cssPath =
+      options.customCssPath || resolve("./runtime/assets/overlay.css");
+    nuxt.options.css.push(cssPath);
 
-    // Add global middleware
-    addRouteMiddleware({
-      name: "oauth.global",
-      path: resolve("./runtime/middleware/oauth.global"),
-      global: true,
-    });
+    // Conditionally add global middleware
+    if (options.enableOAuth !== false) {
+      // Default to true if not specified
+      addRouteMiddleware({
+        name: "oauth.global",
+        path: resolve("./runtime/middleware/oauth.global"),
+        global: true,
+      });
+    }
 
-    // Add server middleware for API authentication
+    // Conditionally add server middleware for API authentication
+    if (options.apiAuthEnabled !== false) {
+      // Default to true if not specified
+      addServerHandler({
+        middleware: true,
+        handler: resolve("./runtime/server/middleware/apiAuth"),
+      });
+    }
+
+    // Add server route for Auth0 with customizable path
+    const auth0Path = options.auth0RoutePath || "/auth/auth0";
     addServerHandler({
-      middleware: true,
-      handler: resolve("./runtime/server/middleware/apiAuth"),
-    });
-
-    // Add server route for Auth0
-    addServerHandler({
-      route: "/auth/auth0",
+      route: auth0Path,
       handler: resolve("./runtime/server/routes/auth/auth0.get"),
     });
   },
