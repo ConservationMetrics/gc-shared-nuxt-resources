@@ -8,6 +8,7 @@
     "dev": "nuxi dev playground",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare",
+    "format": "prettier \"**/*.{js,ts,jsx,tsx,vue}\" --write",
     "release": "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
     "link": "npm link",
     "lint:prettier": "prettier ./ --check --ignore-path .prettierignore",
