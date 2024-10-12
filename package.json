@@ -20,8 +20,7 @@
     "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.13.1",
-    "typescript-eslint": "^8.8.1"
+    "@nuxt/kit": "^3.13.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",
@@ -41,6 +40,8 @@
     "lint-staged": "^15.2.7",
     "nuxt": "^3.13.0",
     "prettier": "^3.3.2",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.8.1",
     "vitest": "^2.0.5",
     "vue-i18n": "^10.0.1",
     "vue-tsc": "^2.1.6"
