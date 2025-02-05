@@ -4,7 +4,6 @@ import { createI18n } from "vue-i18n";
 
 import Auth0Login from "@/src/runtime/components/Auth0Login.vue";
 
-// Mock the LanguagePicker component
 vi.mock("gc-shared-components", () => ({
   LanguagePicker: {
     template: "<div></div>",
@@ -53,18 +52,18 @@ describe("Auth0Login", () => {
   it("changes window.location.href to /auth/auth0 on button click", async () => {
     const wrapper = mountAuth0Login();
 
-    // Mock window.location.href
     const originalLocation = window.location;
-    delete (window as any).location;
-    window.location = { href: "" } as any;
 
-    // Trigger button click
+    Object.defineProperty(window, "location", {
+      configurable: true,
+      writable: true,
+      value: { href: "" } as Location,
+    });
+
     await wrapper.find("button").trigger("click");
 
-    // Check if window.location.href was updated
     expect(window.location.href).toBe("/auth/auth0");
 
-    // Restore the original window.location
     window.location = originalLocation;
   });
 });
