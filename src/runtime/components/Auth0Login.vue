@@ -1,12 +1,11 @@
-<script setup>
+<script lang="ts" setup>
 import { useI18n } from "vue-i18n";
 
-const props = defineProps({
-  errorMessage: {
-    type: String,
-    default: "",
-  },
-});
+interface Props {
+  errorMessage: string;
+}
+
+const props = defineProps<Props>();
 
 const { t } = useI18n();
 

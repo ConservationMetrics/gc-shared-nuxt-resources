@@ -25,8 +25,8 @@ Unlike many Nuxt modules, this repository does not use a `playground/` directory
 
 For development purposes, utilize a symlink to this module in a Nuxt application to use your local code in runtime:
 
-1. Generate type stubs by running `npm run dev:prepare`
-2. In your Nuxt application, run `npm link ../gc-shared-components` (assuming your module and Nuxt application are in the same root directory, if not adapt the path)
+1. Generate type stubs by running `pnpm run dev:prepare`
+2. In your Nuxt application, run `pnpm link ../gc-shared-components` (assuming your module and Nuxt application are in the same root directory, if not adapt the path)
 
 ## Contribution
 
@@ -35,29 +35,29 @@ For development purposes, utilize a symlink to this module in a Nuxt application
   
   ```bash
   # Install dependencies
-  npm install
+  pnpm install
   
   # Generate type stubs
-  npm run dev:prepare
+  pnpm run dev:prepare
   
   # Develop with the playground
-  npm run dev
+  pnpm run dev
   
   # Build the playground
-  npm run dev:build
+  pnpm run dev:build
   
-  # Create a npm symlink
-  npm run link
+  # Create a (p)npm symlink
+  pnpm run link
   
   # Run Prettier
-  npm run lint
+  pnpm run lint
   
   # Run Vitest
-  npm run test
-  npm run test:watch
+  pnpm run test
+  pnpm run test:watch
   
   # Release new version
-  npm run release
+  pnpm run release
   ```
 
 </details>

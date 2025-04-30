@@ -1,29 +1,29 @@
-<script setup>
+<script lang="ts" setup>
 import { ref, computed } from "vue";
 import { useI18n } from "vue-i18n";
 
-// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-const { t, locale, locales } = useI18n();
+// @ts-expect-error - Ignore missing types for i18n plugin
+const { locale, locales, setLocale } = useI18n();
+
+interface Locale {
+  code: string;
+  name: string;
+}
 
 // Populate available locales from i18n plugin
 const availableLocales = computed(() => locales.value);
 
 const currentLocaleName = computed(() => {
   const currentLocale = locales.value.find(
-    (lang) => lang.code === locale.value,
+    (lang: Locale) => lang.code === locale.value,
   );
   return currentLocale ? currentLocale.name : "";
 });
 
-// Dropdown state handling
 const dropdownOpen = ref(false);
 
-const toggleDropdown = () => {
-  dropdownOpen.value = !dropdownOpen.value;
-};
-
-const changeLocale = (localeCode) => {
-  locale.value = localeCode;
+const changeLocale = (locale: Locale): void => {
+  setLocale(locale.code);
   dropdownOpen.value = false;
 };
 </script>
@@ -32,7 +32,7 @@ const changeLocale = (localeCode) => {
   <div class="relative inline-block text-left">
     <div>
       <button
-        @click="toggleDropdown"
+        @click="dropdownOpen = !dropdownOpen"
         class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none"
       >
         {{ currentLocaleName }}
@@ -61,7 +61,11 @@ const changeLocale = (localeCode) => {
           v-for="locale in availableLocales"
           :key="locale.code"
           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-          @click.prevent.stop="changeLocale(locale.code)"
+          @click="
+            ($event.preventDefault(),
+            $event.stopPropagation(),
+            changeLocale(locale))
+          "
         >
           {{ locale.name }}
         </a>

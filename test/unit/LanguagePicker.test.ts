@@ -27,11 +27,9 @@ describe("LanguagePicker.vue", () => {
     const wrapper = mount(LanguagePicker);
     const button = wrapper.find("button");
 
-    // Open dropdown
     await button.trigger("click");
     expect(wrapper.find(".origin-top-right").exists()).toBe(true);
 
-    // Close dropdown
     await button.trigger("click");
     expect(wrapper.find(".origin-top-right").exists()).toBe(false);
   });
@@ -42,10 +40,8 @@ describe("LanguagePicker.vue", () => {
 
     const button = wrapper.find("button");
 
-    // Open dropdown
     await button.trigger("click");
 
-    // Simulate clicking on a locale
     const localeLink = wrapper.findAll("a").at(1);
     if (localeLink) {
       await localeLink.trigger("click");
@@ -54,10 +50,8 @@ describe("LanguagePicker.vue", () => {
       throw new Error("Could not find locale link");
     }
 
-    // Check if setLocale was called with 'fr'
     expect(locale.value).toBe("fr");
 
-    // Check if the locale name changed
     expect(localeLink.text()).toContain("French");
   });
 });
