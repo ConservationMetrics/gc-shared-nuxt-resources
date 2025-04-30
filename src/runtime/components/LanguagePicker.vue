@@ -22,8 +22,9 @@ const currentLocaleName = computed(() => {
 
 const dropdownOpen = ref(false);
 
-const toggleDropdown = () => {
-  dropdownOpen.value = !dropdownOpen.value;
+const changeLocale = (locale: Locale): void => {
+  setLocale(locale.code);
+  dropdownOpen.value = false;
 };
 </script>
 
@@ -31,7 +32,7 @@ const toggleDropdown = () => {
   <div class="relative inline-block text-left">
     <div>
       <button
-        @click="toggleDropdown"
+        @click="dropdownOpen = !dropdownOpen"
         class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none"
       >
         {{ currentLocaleName }}
@@ -63,7 +64,7 @@ const toggleDropdown = () => {
           @click="
             ($event.preventDefault(),
             $event.stopPropagation(),
-            setLocale(locale.code))
+            changeLocale(locale))
           "
         >
           {{ locale.name }}
