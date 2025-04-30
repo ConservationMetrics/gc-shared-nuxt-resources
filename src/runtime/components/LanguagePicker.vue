@@ -67,7 +67,11 @@ const changeLocale = (localeCode: string): void => {
           v-for="locale in availableLocales"
           :key="locale.code"
           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-          @click.prevent.stop="changeLocale(locale.code)"
+          @click="
+            ($event.preventDefault(),
+            $event.stopPropagation(),
+            changeLocale(locale.code))
+          "
         >
           {{ locale.name }}
         </a>
