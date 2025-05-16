@@ -1,13 +1,9 @@
 <script lang="ts" setup>
-import { useI18n } from "vue-i18n";
-
 interface Props {
   errorMessage: string;
 }
 
 const props = defineProps<Props>();
-
-const { t } = useI18n();
 
 const loginWithAuth0 = () => {
   window.location.href = "/auth/auth0";
@@ -30,7 +26,7 @@ const loginWithAuth0 = () => {
         {{ $t("loginButton") }}
       </button>
       <p v-if="props.errorMessage" class="text-red-500 text-xs italic">
-        {{ t("yourAccessIsPending") }}
+        {{ $t("yourAccessIsPending") }}
       </p>
     </div>
   </div>
