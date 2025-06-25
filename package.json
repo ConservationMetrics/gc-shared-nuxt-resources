@@ -61,7 +61,7 @@
     ]
   },
   "engines": {
-    "node": "20.15.0"
+    "node": ">=20.19.0"
   },
   "author": "Conservation Metrics",
   "license": "MIT"
