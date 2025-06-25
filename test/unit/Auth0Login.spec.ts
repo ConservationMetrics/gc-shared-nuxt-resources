@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 import { mount } from "@vue/test-utils";
 import { createI18n } from "vue-i18n";
 
-import Auth0Login from "@/src/runtime/components/Auth0Login.vue";
+import Auth0Login from "@/runtime/components/Auth0Login.vue";
 
 vi.mock("gc-shared-components", () => ({
   LanguagePicker: {

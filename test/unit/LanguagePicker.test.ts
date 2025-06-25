@@ -3,7 +3,7 @@ import { vi, describe, it, expect } from "vitest";
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 
-import LanguagePicker from "@/src/runtime/components/LanguagePicker.vue";
+import LanguagePicker from "@/runtime/components/LanguagePicker.vue";
 
 vi.mock("vue-i18n", () => ({
   useI18n: () => ({
