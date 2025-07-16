@@ -13,6 +13,12 @@ export default defineNuxtRouteMiddleware(async (to) => {
   } = useRuntimeConfig();
 
   if (authStrategy === "auth0" && !loggedIn.value && to.path !== "/login") {
+    // Only store redirect URI on client side
+    if (import.meta.client) {
+      const redirectUri = window.location.href;
+      sessionStorage.setItem("auth0_redirect_uri", redirectUri);
+    }
+    // Redirect to login
     return navigateTo("/login");
   }
 });

@@ -24,7 +24,9 @@ const i18n = createI18n({
 });
 
 // Helper function to mount the Auth0Login component
-const mountAuth0Login = (props = {}) => {
+const mountAuth0Login = (
+  props: { errorMessage: string } = { errorMessage: "" },
+) => {
   return mount(Auth0Login, {
     global: {
       plugins: [i18n],
@@ -63,7 +65,5 @@ describe("Auth0Login", () => {
     await wrapper.find("button").trigger("click");
 
     expect(window.location.href).toBe("/auth/auth0");
-
-    window.location = originalLocation;
   });
 });

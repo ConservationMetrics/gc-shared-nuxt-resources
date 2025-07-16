@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { onMounted } from "vue";
+
 interface Props {
   errorMessage: string;
 }
@@ -8,6 +10,17 @@ const props = defineProps<Props>();
 const loginWithAuth0 = () => {
   window.location.href = "/auth/auth0";
 };
+
+// Check for stored redirect URI on component mount
+onMounted(() => {
+  const redirectUri = sessionStorage.getItem("auth0_redirect_uri");
+  if (redirectUri) {
+    // Clear the stored URI
+    sessionStorage.removeItem("auth0_redirect_uri");
+    // Redirect to the original destination
+    window.location.href = redirectUri;
+  }
+});
 </script>
 
 <template>
