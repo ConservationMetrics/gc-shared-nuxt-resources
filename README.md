@@ -1,4 +1,4 @@
-# GuardianConnector Shared Resources Library
+# GuardianConnector Shared Nuxt Resources Library
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
@@ -14,10 +14,10 @@ Shared components (components, pages, assets, middleware and more) for GuardianC
 Install the module to your Nuxt application with one command:
 
 ```bash
-npx nuxi module add gc-shared-resources
+npx nuxi module add gc-shared-nuxt-resources
 ```
 
-That's it! You can now use GuardianConnector Shared Resources Library in your Nuxt app ✨
+That's it! You can now use GuardianConnector Shared Nuxt Resources Library in your Nuxt app ✨
 
 ## How to use this module
 
@@ -25,40 +25,76 @@ Unlike many Nuxt modules, this repository does not use a `playground/` directory
 
 For development purposes, utilize a symlink to this module in a Nuxt application to use your local code in runtime:
 
-1. Generate type stubs by running `pnpm run dev:prepare`
-2. In your Nuxt application, run `pnpm link ../gc-shared-components` (assuming your module and Nuxt application are in the same root directory, if not adapt the path)
+### 1. Prepare the module
+
+Inside the `gc-shared-nuxt-resources` directory:
+
+```bash
+pnpm run dev:prepare
+```
+
+This generates type stubs and prepares the build artifacts.
+
+### 2. Link the module globally
+
+Still in `gc-shared-nuxt-resources`, run:
+
+```bash
+pnpm link --global
+```
+
+### 3. Link it in the Nuxt app
+
+Now go to your Nuxt app (e.g., `gc-explorer`) and link the global module:
+
+```bash
+pnpm link gc-shared-nuxt-resources
+```
+
+### 4. Verify the Link
+
+``bash
+ls -l node_modules/gc-shared-nuxt-resources
+
+````
+
+You should see a symlink pointing to your local module directory.
+
+> [!CAUTION]
+>
+> 💡 Avoid running `pnpm install` in your Nuxt app again afterward, or it may override the symlink with the npm version unless the versions match exactly.
 
 ## Contribution
 
 <details>
   <summary>Local development</summary>
-  
+
   ```bash
   # Install dependencies
   pnpm install
-  
+
   # Generate type stubs
   pnpm run dev:prepare
-  
+
   # Develop with the playground
   pnpm run dev
-  
+
   # Build the playground
   pnpm run dev:build
-  
+
   # Create a (p)npm symlink
   pnpm run link
-  
+
   # Run Prettier
   pnpm run lint
-  
+
   # Run Vitest
   pnpm run test
   pnpm run test:watch
-  
+
   # Release new version
   pnpm run release
-  ```
+````
 
 </details>
 

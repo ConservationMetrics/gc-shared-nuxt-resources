@@ -1,5 +1,5 @@
 {
-  "name": "gc-shared-resources",
+  "name": "gc-shared-nuxt-resources",
   "version": "1.1.8",
   "description": "Shared resources for Guardian Connector Nuxt.js applications",
   "type": "module",
