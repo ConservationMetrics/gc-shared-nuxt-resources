@@ -26,6 +26,7 @@ Unlike many Nuxt modules, this repository does not use a `playground/` directory
 For development purposes, utilize a symlink to this module in a Nuxt application to use your local code in runtime:
 
 ### 1. Prepare the module
+
 Inside the `gc-shared-nuxt-resources` directory:
 
 ```bash
@@ -54,7 +55,8 @@ pnpm link gc-shared-nuxt-resources
 
 ``bash
 ls -l node_modules/gc-shared-nuxt-resources
-```
+
+````
 
 You should see a symlink pointing to your local module directory.
 
@@ -66,33 +68,33 @@ You should see a symlink pointing to your local module directory.
 
 <details>
   <summary>Local development</summary>
-  
+
   ```bash
   # Install dependencies
   pnpm install
-  
+
   # Generate type stubs
   pnpm run dev:prepare
-  
+
   # Develop with the playground
   pnpm run dev
-  
+
   # Build the playground
   pnpm run dev:build
-  
+
   # Create a (p)npm symlink
   pnpm run link
-  
+
   # Run Prettier
   pnpm run lint
-  
+
   # Run Vitest
   pnpm run test
   pnpm run test:watch
-  
+
   # Release new version
   pnpm run release
-  ```
+````
 
 </details>
 
