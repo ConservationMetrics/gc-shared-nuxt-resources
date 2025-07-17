@@ -16,7 +16,7 @@ export interface ModuleOptions {
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
-    name: "gc-shared-resources",
+    name: "gc-shared-nuxt-resources",
     configKey: "gcSharedResources",
   },
 
