@@ -58,7 +58,7 @@ ls -l node_modules/gc-shared-nuxt-resources
 
 You should see a symlink pointing to your local module directory.
 
-> ![NOTE]
+> [!CAUTION]
 >
 > 💡 Avoid running `pnpm install` in your Nuxt app again afterward, or it may override the symlink with the npm version unless the versions match exactly.
 
