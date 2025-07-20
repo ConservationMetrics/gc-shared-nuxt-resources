@@ -13,12 +13,17 @@ const loginWithAuth0 = () => {
 
 // Check for stored redirect URI on component mount
 onMounted(() => {
+  console.log("🔍 Auth0Login: Component mounted, checking for redirect URI");
   const redirectUri = sessionStorage.getItem("auth0_redirect_uri");
+  console.log("🔍 Auth0Login: Found redirect URI:", redirectUri);
   if (redirectUri) {
+    console.log("🔍 Auth0Login: Redirecting to:", redirectUri);
     // Clear the stored URI
     sessionStorage.removeItem("auth0_redirect_uri");
     // Redirect to the original destination
     window.location.href = redirectUri;
+  } else {
+    console.log("🔍 Auth0Login: No redirect URI found, staying on login page");
   }
 });
 </script>
