@@ -24,7 +24,9 @@ const i18n = createI18n({
 });
 
 // Helper function to mount the Auth0Login component
-const mountAuth0Login = (props = {}) => {
+const mountAuth0Login = (
+  props: { errorMessage: string } = { errorMessage: "" },
+) => {
   return mount(Auth0Login, {
     global: {
       plugins: [i18n],
@@ -64,6 +66,92 @@ describe("Auth0Login", () => {
 
     expect(window.location.href).toBe("/auth/auth0");
 
-    window.location = originalLocation;
+    Object.defineProperty(window, "location", {
+      configurable: true,
+      writable: true,
+      value: originalLocation,
+    });
+  });
+
+  it("redirects to stored URI on mount if present", async () => {
+    const originalLocation = window.location;
+
+    Object.defineProperty(window, "location", {
+      configurable: true,
+      writable: true,
+      value: { href: "" } as Location,
+    });
+
+    // Mock sessionStorage
+    const mockSessionStorage = {
+      getItem: vi.fn().mockReturnValue("/config"),
+      removeItem: vi.fn(),
+      setItem: vi.fn(),
+      clear: vi.fn(),
+    };
+    Object.defineProperty(window, "sessionStorage", {
+      value: mockSessionStorage,
+      writable: true,
+    });
+
+    const wrapper = mountAuth0Login();
+
+    // Wait for onMounted to execute
+    await wrapper.vm.$nextTick();
+
+    expect(mockSessionStorage.getItem).toHaveBeenCalledWith(
+      "auth0_redirect_uri",
+    );
+    expect(mockSessionStorage.removeItem).toHaveBeenCalledWith(
+      "auth0_redirect_uri",
+    );
+    expect(window.location.href).toBe("/config");
+
+    // Restore original values
+    Object.defineProperty(window, "location", {
+      configurable: true,
+      writable: true,
+      value: originalLocation,
+    });
+  });
+
+  it("does not redirect if no stored URI", async () => {
+    const originalLocation = window.location;
+
+    Object.defineProperty(window, "location", {
+      configurable: true,
+      writable: true,
+      value: { href: "" } as Location,
+    });
+
+    // Mock sessionStorage
+    const mockSessionStorage = {
+      getItem: vi.fn().mockReturnValue(null),
+      removeItem: vi.fn(),
+      setItem: vi.fn(),
+      clear: vi.fn(),
+    };
+    Object.defineProperty(window, "sessionStorage", {
+      value: mockSessionStorage,
+      writable: true,
+    });
+
+    const wrapper = mountAuth0Login();
+
+    // Wait for onMounted to execute
+    await wrapper.vm.$nextTick();
+
+    expect(mockSessionStorage.getItem).toHaveBeenCalledWith(
+      "auth0_redirect_uri",
+    );
+    expect(mockSessionStorage.removeItem).not.toHaveBeenCalled();
+    expect(window.location.href).toBe(""); // Should not change
+
+    // Restore original values
+    Object.defineProperty(window, "location", {
+      configurable: true,
+      writable: true,
+      value: originalLocation,
+    });
   });
 });
