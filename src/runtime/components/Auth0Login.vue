@@ -11,19 +11,56 @@ const loginWithAuth0 = () => {
   window.location.href = "/auth/auth0";
 };
 
-// Check for stored redirect URI on component mount
+// Handle redirect logic on component mount
 onMounted(() => {
-  console.log("🔍 Auth0Login: Component mounted, checking for redirect URI");
-  const redirectUri = sessionStorage.getItem("auth0_redirect_uri");
-  console.log("🔍 Auth0Login: Found redirect URI:", redirectUri);
-  if (redirectUri) {
-    console.log("🔍 Auth0Login: Redirecting to:", redirectUri);
-    // Clear the stored URI
-    sessionStorage.removeItem("auth0_redirect_uri");
-    // Redirect to the original destination
-    window.location.href = redirectUri;
+  console.log(
+    "🔍 Auth0Login: Component mounted, checking URL for redirect logic",
+  );
+
+  const currentUrl = window.location.href;
+  const currentPath = window.location.pathname;
+
+  console.log("🔍 Auth0Login: Current URL:", currentUrl);
+  console.log("🔍 Auth0Login: Current path:", currentPath);
+
+  // Skip if we're already on login page
+  if (currentPath === "/login") {
+    console.log(
+      "🔍 Auth0Login: Already on login page, checking for stored redirect",
+    );
+    const storedRedirect = sessionStorage.getItem("auth0_redirect_uri");
+    if (storedRedirect) {
+      console.log(
+        "🔍 Auth0Login: Found stored redirect, redirecting to:",
+        storedRedirect,
+      );
+      sessionStorage.removeItem("auth0_redirect_uri");
+      window.location.href = storedRedirect;
+    } else {
+      console.log("🔍 Auth0Login: No stored redirect found, staying on login");
+    }
+    return;
+  }
+
+  // Check if we're on a guardianconnector.net domain
+  if (currentUrl.includes("guardianconnector.net")) {
+    console.log(
+      "🔍 Auth0Login: On guardianconnector.net, storing current URL for redirect",
+    );
+    sessionStorage.setItem("auth0_redirect_uri", currentUrl);
   } else {
-    console.log("🔍 Auth0Login: No redirect URI found, staying on login page");
+    console.log(
+      "🔍 Auth0Login: Not on guardianconnector.net, clearing any stored redirect",
+    );
+    const storedRedirect = sessionStorage.getItem("auth0_redirect_uri");
+    if (storedRedirect) {
+      console.log(
+        "🔍 Auth0Login: Found stored redirect, redirecting to:",
+        storedRedirect,
+      );
+      sessionStorage.removeItem("auth0_redirect_uri");
+      window.location.href = storedRedirect;
+    }
   }
 });
 </script>
